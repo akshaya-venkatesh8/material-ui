@@ -34,6 +34,10 @@ export interface BaseTextFieldProps
    */
   autoFocus?: boolean;
   /**
+   * The character counter helper text content.
+   */
+  charCounter?: boolean;
+  /**
    * @ignore
    */
   children?: React.ReactNode;
@@ -78,6 +82,7 @@ export interface BaseTextFieldProps
    * The helper text content.
    */
   helperText?: React.ReactNode;
+
   /**
    * The id of the `input` element.
    * Use this prop to make `label` and `helperText` accessible for screen readers.

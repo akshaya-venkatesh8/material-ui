@@ -52,7 +52,7 @@ export default function FormPropsTextFields() {
           id="outlined-helperText"
           label="Helper text"
           defaultValue="Default Value"
-          helperText="Some important text"
+          helperText="Some not so important text"
         />
       </div>
       <div>

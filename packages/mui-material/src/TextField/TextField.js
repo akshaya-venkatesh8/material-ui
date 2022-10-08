@@ -13,6 +13,9 @@ import FormControl from '../FormControl';
 import FormHelperText from '../FormHelperText';
 import Select from '../Select';
 import { getTextFieldUtilityClass } from './textFieldClasses';
+import {useRef} from 'react';
+import TableRow from '../TableRow';
+//import {forceUpdate} from 'react';
 
 const variantComponent = {
   standard: Input,
@@ -73,6 +76,7 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
   const {
     autoComplete,
     autoFocus = false,
+    charCounter,
     children,
     className,
     color = 'primary',
@@ -175,6 +179,14 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
     />
   );
 
+  const [labelText, setLabelText] = React.useState('');
+
+  const handleValueChange = event => {
+    var length = event.target.value.length;
+    var max = event.target.maxLength;
+    setLabelText(length + '/' + max);
+  }
+
   return (
     <TextFieldRoot
       className={clsx(classes.root, className)}
@@ -186,6 +198,7 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
       color={color}
       variant={variant}
       ownerState={ownerState}
+      onChange={handleValueChange}
       {...other}
     >
       {label != null && label !== '' && (
@@ -208,8 +221,14 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
       ) : (
         InputElement
       )}
+      
+      {charCounter && (
+        <FormHelperText style={{display: 'flex', justifyContent: 'right'}} {...FormHelperTextProps}>
+          {labelText}
+        </FormHelperText>
+      )}
 
-      {helperText && (
+      {helperText && !charCounter && (
         <FormHelperText id={helperTextId} {...FormHelperTextProps}>
           {helperText}
         </FormHelperText>
@@ -234,6 +253,10 @@ TextField.propTypes /* remove-proptypes */ = {
    * @default false
    */
   autoFocus: PropTypes.bool,
+  /**
+   * The character counter helper text content.
+   */
+  charCounter: PropTypes.bool,
   /**
    * @ignore
    */
