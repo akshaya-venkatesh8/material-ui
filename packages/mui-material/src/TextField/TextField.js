@@ -184,7 +184,9 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
   const handleValueChange = event => {
     var length = event.target.value.length;
     var max = event.target.maxLength;
-    setLabelText(length + '/' + max);
+    if (max > 0){
+      setLabelText(length + '/' + max);
+    }
   }
 
   return (
