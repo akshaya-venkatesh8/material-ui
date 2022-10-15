@@ -204,8 +204,6 @@ const RadioIcon = styled('span', {
   slot: 'Icon',
   overridesResolver: (props, styles) => styles.icon,
 })<{ ownerState: RadioOwnerState }>(({ ownerState }) => ({
-  width: '50%',
-  height: '50%',
   borderRadius: 'inherit',
   color: 'inherit',
   backgroundColor: 'currentColor',
@@ -223,6 +221,7 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
   const {
     checked: checkedProp,
     checkedIcon,
+    checkedIconSize,
     component,
     componentsProps = {},
     defaultChecked,
@@ -369,7 +368,8 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
       <RadioRadio {...radioProps}>
         {checked && !disableIcon && checkedIcon}
         {!checked && !disableIcon && uncheckedIcon}
-        {!checkedIcon && !uncheckedIcon && !disableIcon && <RadioIcon {...radioIconProps} />}
+        {!checkedIconSize && !checkedIcon && !uncheckedIcon && !disableIcon && <RadioIcon style={{width:'50%', height:'50%'}} {...radioIconProps} />}
+        {checkedIconSize && !checkedIcon && !uncheckedIcon && !disableIcon && <RadioIcon style={{width:checkedIconSize, height:checkedIconSize}} {...radioIconProps} />}
         <RadioAction {...radioActionProps}>
           <RadioInput {...radioInputProps} />
         </RadioAction>
@@ -397,6 +397,10 @@ Radio.propTypes /* remove-proptypes */ = {
    * The icon to display when the component is checked.
    */
   checkedIcon: PropTypes.node,
+  /**
+   * The size of the icon to display when the component is checked.
+   */
+  checkedIconSize: PropTypes.string,
   /**
    * @ignore
    */

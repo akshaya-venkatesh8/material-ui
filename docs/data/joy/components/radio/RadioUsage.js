@@ -48,7 +48,7 @@ ${prependLinesSpace(code, 2)}
             name="radio-button-usage"
             sx={{ mt: 1 }}
           >
-            <Radio label="Regular crust" value="1" {...props} />
+            <Radio checkedIconSize="33%" label="Regular crust" value="1" {...props} />
             <Radio label="Deep dish" value="2" {...props} />
             <Radio label="Thin crust" value="3" {...props} disabled />
           </RadioGroup>

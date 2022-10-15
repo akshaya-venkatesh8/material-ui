@@ -29,6 +29,10 @@ export interface RadioTypeMap<P = {}, D extends React.ElementType = 'span'> {
        */
       checkedIcon?: React.ReactNode;
       /**
+       * The size of the icon to display when the component is checked.
+       */
+      checkedIconSize?: string;
+      /**
        * Class name applied to the root element.
        */
       className?: string;
