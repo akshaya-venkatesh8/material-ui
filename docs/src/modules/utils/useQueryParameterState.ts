@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { debounce } from '@mui/material/utils';
+import { WindowScroller } from 'react-virtualized';
 
 const QUERY_UPDATE_WAIT_MS = 220;
 
@@ -38,9 +39,7 @@ export default function useQueryParameterState(
         if (window.location.search !== newSearch) {
           router.replace(
             {
-              pathname: router.pathname,
-              // TODO: this resets the scroll position, even though we have scroll: false
-              // hash: window.location.hash,
+              pathname: window.location.pathname,
               search: newSearch,
             },
             undefined,
