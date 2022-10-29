@@ -12,9 +12,9 @@ export default function BasicTextFields() {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" helperText="Begin typing." charCounter inputProps={{maxLength: 20}}/>
-      <TextField id="filled-basic" label="Filled" variant="filled" charCounter />
-      <TextField id="standard-basic" label="Standard" variant="standard" helperText="Begin typing."/>
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <TextField id="filled-basic" label="Filled" variant="filled" />
+      <TextField id="standard-basic" label="Standard" variant="standard" />
     </Box>
   );
 }

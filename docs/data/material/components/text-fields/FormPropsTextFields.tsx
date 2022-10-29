@@ -54,6 +54,14 @@ export default function FormPropsTextFields() {
           defaultValue="Default Value"
           helperText="Some important text"
         />
+        <TextField
+          id="outlined-charCounter"
+          label="Character counter"
+          placeholder="Type here..."
+          helperText="Helper Text" 
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
       </div>
       <div>
         <TextField
@@ -108,6 +116,15 @@ export default function FormPropsTextFields() {
           helperText="Some important text"
           variant="filled"
         />
+        <TextField
+          id="filled-charCounter"
+          label="Character counter"
+          placeholder="Type here..."
+          helperText="Helper Text" 
+          variant="filled"
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
       </div>
       <div>
         <TextField
@@ -161,6 +178,15 @@ export default function FormPropsTextFields() {
           defaultValue="Default Value"
           helperText="Some important text"
           variant="standard"
+        />
+        <TextField
+          id="standard-charCounter"
+          label="Character counter"
+          placeholder="Type here..."
+          helperText="Helper Text" 
+          variant="standard"
+          charCounter 
+          inputProps={{maxLength: 20}}
         />
       </div>
     </Box>

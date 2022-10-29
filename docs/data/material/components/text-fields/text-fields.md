@@ -28,9 +28,11 @@ but MUI will continue to support it.
 
 ## Form props
 
-Standard form attributes are supported e.g. `required`, `disabled`, `type`, etc. as well as a `helperText` which is used to give context about a field's input, such as how the input will be used.
+Standard form attributes are supported e.g. `required`, `disabled`, `type`, etc. as well as a `helperText` which is used to give context about a field's input, such as how the input will be used. There is also a helpful `charCounter` attribute that allows you to see how many characters have been typed into a textfield. The `charCounter` attribute must be used in conjunction with a maximum character limit to let users know how many characters they have left to use for a given textfield. 
 
 {{"demo": "FormPropsTextFields.js"}}
+
+**Note:** Only one of the `helperText` or `charCounter` attributes can be used at any one time. If a `charCounter` attribute is active, the set `helperText` will not appear. In order to use the `helperText` you must remove the `charCounter`. You can see this reflected in the above demo. 
 
 ## Validation
 
