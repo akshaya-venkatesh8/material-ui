@@ -15,7 +15,6 @@ import Select from '../Select';
 import { getTextFieldUtilityClass } from './textFieldClasses';
 import {useRef} from 'react';
 import TableRow from '../TableRow';
-//import {forceUpdate} from 'react';
 
 const variantComponent = {
   standard: Input,
@@ -225,7 +224,7 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
       )}
       
       {charCounter && (
-        <FormHelperText style={{display: 'flex', justifyContent: 'right'}} {...FormHelperTextProps}>
+        <FormHelperText data-testid='charCounter' style={{display: 'flex', justifyContent: 'right'}} {...FormHelperTextProps}>
           {labelText}
         </FormHelperText>
       )}

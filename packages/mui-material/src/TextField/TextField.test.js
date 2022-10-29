@@ -6,6 +6,7 @@ import { inputBaseClasses } from '@mui/material/InputBase';
 import MenuItem from '@mui/material/MenuItem';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import TextField, { textFieldClasses as classes } from '@mui/material/TextField';
+import { fireEvent } from '@testing-library/dom';
 
 describe('<TextField />', () => {
   const { render } = createRenderer();
@@ -224,6 +225,84 @@ describe('<TextField />', () => {
       );
 
       expect(getByRole('button')).toHaveAccessibleDescription('Foo bar');
+    });
+  });
+
+  describe('prop: charCounter', () => {
+    it('create textfield with input text and a character counter', () => {
+      const { getByTestId, getByRole } = render(
+        <TextField
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
+      );
+
+      const charCount = getByTestId('charCounter');
+      const textInput = getByRole('textbox');
+
+      fireEvent.change(textInput, {target: {value: 'new value'}})
+
+      expect(textInput).to.have.value('new value');
+      expect(charCount).to.have.text('9/20'); 
+    });
+
+    it('create textfield with no input text and a character counter', () => {
+      const { getByTestId, getByRole } = render(
+        <TextField
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
+      );
+
+      const charCount = getByTestId('charCounter');
+      const textInput = getByRole('textbox');
+
+      expect(textInput).to.have.value('');
+      expect(charCount).to.have.text(''); 
+    });
+
+    it('create textfield with input text and a character counter, increase text amount', () => {
+      const { getByTestId, getByRole } = render(
+        <TextField 
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
+      );
+
+      const charCount = getByTestId('charCounter');
+      const textInput = getByRole('textbox');
+
+      fireEvent.change(textInput, {target: {value: 'new value'}});
+
+      expect(textInput).to.have.value('new value');
+      expect(charCount).to.have.text('9/20');
+      
+      fireEvent.change(textInput, {target: {value: 'another new value'}});
+      
+      expect(textInput).to.have.value('another new value');
+      expect(charCount).to.have.text('17/20');
+    });
+
+    it('create textfield with input text and a character counter, decrease text amount', () => {
+      const { getByTestId, getByRole } = render(
+        <TextField
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
+      );
+
+      const charCount = getByTestId('charCounter');
+      const textInput = getByRole('textbox');
+
+      fireEvent.change(textInput, {target: {value: 'new value'}})
+
+      expect(textInput).to.have.value('new value');
+      expect(charCount).to.have.text('9/20');
+
+      fireEvent.change(textInput, {target: {value: 'val'}});
+      
+      expect(textInput).to.have.value('val');
+      expect(charCount).to.have.text('3/20');
     });
   });
 });
