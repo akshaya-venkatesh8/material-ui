@@ -84,6 +84,14 @@ const PopperTooltip = React.forwardRef(function PopperTooltip(props, ref) {
    * modifiers.flip is essentially a flip for controlled/uncontrolled behavior
    */
   const [placement, setPlacement] = React.useState(rtlPlacement);
+  const [tooltipAnchorEl, setTooltipAnchorEl] = React.useState(anchorEl);
+
+  
+  React.useEffect(() => {
+    if (anchorEl) {
+      setTooltipAnchorEl(anchorEl);
+    }
+  }, [anchorEl]);
 
   React.useEffect(() => {
     if (popperRef.current) {
@@ -92,7 +100,7 @@ const PopperTooltip = React.forwardRef(function PopperTooltip(props, ref) {
   });
 
   useEnhancedEffect(() => {
-    if (!anchorEl || !open) {
+    if (!tooltipAnchorEl || !open) {
       return undefined;
     }
 
@@ -100,7 +108,7 @@ const PopperTooltip = React.forwardRef(function PopperTooltip(props, ref) {
       setPlacement(data.placement);
     };
 
-    const resolvedAnchorEl = resolveAnchorEl(anchorEl);
+    const resolvedAnchorEl = resolveAnchorEl(tooltipAnchorEl);
 
     if (process.env.NODE_ENV !== 'production') {
       if (resolvedAnchorEl && resolvedAnchorEl.nodeType === 1) {
@@ -154,7 +162,7 @@ const PopperTooltip = React.forwardRef(function PopperTooltip(props, ref) {
       popperModifiers = popperModifiers.concat(popperOptions.modifiers);
     }
 
-    const popper = createPopper(resolveAnchorEl(anchorEl), tooltipRef.current, {
+    const popper = createPopper(resolveAnchorEl(tooltipAnchorEl), tooltipRef.current, {
       placement: rtlPlacement,
       ...popperOptions,
       modifiers: popperModifiers,
@@ -166,7 +174,7 @@ const PopperTooltip = React.forwardRef(function PopperTooltip(props, ref) {
       popper.destroy();
       handlePopperRefRef.current(null);
     };
-  }, [anchorEl, disablePortal, modifiers, open, popperOptions, rtlPlacement]);
+  }, [tooltipAnchorEl, disablePortal, modifiers, open, popperOptions, rtlPlacement]);
 
   const childProps = { placement };
 
