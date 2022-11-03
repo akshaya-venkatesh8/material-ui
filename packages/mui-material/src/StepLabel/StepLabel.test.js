@@ -229,4 +229,18 @@ describe('<StepLabel />', () => {
       expect(icon).to.have.class(classes.active);
     });
   });
+
+  describe('passes index to  <StepIcon> child', () => {
+    it('Icon child has index prop', () => {
+      const CustomizedIcon = () => <div data-testid="custom-icon" />;
+      const { container } = render(
+        <Step index={0}>
+          <StepLabel StepIconComponent={CustomizedIcon}>Step One</StepLabel>
+        </Step>,
+      );
+
+      const icon = container.querySelector(`.${classes.iconContainer}`);
+      expect(icon).to.have.attribute('index')
+    });
+  });
 });
