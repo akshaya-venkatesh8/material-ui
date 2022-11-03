@@ -12,6 +12,13 @@ interface Iterator<T> {
   (appendStyle: (responsizeStyles: Record<string, any>, style: object) => void, value: T): void;
 }
 
+export const sortBreakPointKeys = (
+  breakpointsKeys: string[],
+  responsize: object
+) => {
+  return breakpointsKeys.filter((key: string) => Object.keys(responsize).includes(key))
+}
+
 export const traverseBreakpoints = <T = unknown>(
   breakpoints: Breakpoints,
   responsize: T | T[] | Record<string, any> | undefined,
@@ -37,8 +44,8 @@ export const traverseBreakpoints = <T = unknown>(
     const keys =
       Object.keys(responsize).length > breakpoints.keys.length
         ? breakpoints.keys
-        : Object.keys(responsize);
-
+        : sortBreakPointKeys(breakpoints.keys, {...responsize});
+      
     keys.forEach((key) => {
       if (breakpoints.keys.indexOf(key as Breakpoint) !== -1) {
         // @ts-ignore already checked that responsize is an object

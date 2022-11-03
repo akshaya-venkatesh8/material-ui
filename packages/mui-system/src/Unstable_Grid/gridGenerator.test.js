@@ -13,6 +13,7 @@ import {
   generateSizeClassNames,
   generateSpacingClassNames,
   generateDirectionClasses,
+  sortBreakPointKeys,
 } from './gridGenerator';
 
 const spacing = createSpacing();
@@ -40,6 +41,12 @@ describe('grid generator', () => {
           margin: 5,
         },
       });
+    });
+
+    it('keys order correctly', () => {
+      const responsize = {lg: 3, xs: 1, md: 2};
+      const sorted = sortBreakPointKeys(breakpoints.keys, responsize);
+      expect(sorted).to.deep.equal(["xs", "md", "lg"]);
     });
 
     it('supports object', () => {
