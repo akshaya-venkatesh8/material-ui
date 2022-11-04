@@ -125,7 +125,7 @@ const AutocompleteRoot = styled('div', {
   },
   [`& .${inputClasses.root}.${inputBaseClasses.sizeSmall}`]: {
     [`& .${inputClasses.input}`]: {
-      padding: '2px 4px 3px 0',
+      padding: '2px 4px 3px 4px',
     },
   },
   [`& .${outlinedInputClasses.root}`]: {

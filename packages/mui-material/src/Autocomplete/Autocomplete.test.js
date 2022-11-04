@@ -54,6 +54,18 @@ describe('<Autocomplete />', () => {
     }),
   );
 
+  it('should be have proper styles', () => {
+    render(
+      <Autocomplete
+        options={['one', 'two', 'three']}
+        renderInput={(params) => <TextField {...params} />}
+      />,
+    );
+    const input = screen.getByRole('combobox');
+    const containerStyle = input.get(0).style;
+    expect(containerStyle).to.have.property('paddingBottom', '4px')
+  });
+
   it('should be customizable in the theme', () => {
     const theme = createTheme({
       components: {
