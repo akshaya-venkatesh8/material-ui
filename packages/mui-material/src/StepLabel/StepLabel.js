@@ -127,6 +127,7 @@ const StepLabel = React.forwardRef(function StepLabel(inProps, ref) {
     optional,
     StepIconComponent: StepIconComponentProp,
     StepIconProps,
+    index,
     ...other
   } = props;
 
@@ -167,6 +168,7 @@ const StepLabel = React.forwardRef(function StepLabel(inProps, ref) {
             error={error}
             icon={icon}
             {...StepIconProps}
+            index={index}
           />
         </StepLabelIconContainer>
       ) : null}

@@ -1,5 +1,6 @@
 {
   "props": {
+    "index": { "type": { "name":  "number" } },
     "active": { "type": { "name": "bool" } },
     "classes": { "type": { "name": "object" } },
     "completed": { "type": { "name": "bool" } },

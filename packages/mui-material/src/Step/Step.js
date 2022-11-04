@@ -93,6 +93,13 @@ const Step = React.forwardRef(function Step(inProps, ref) {
 
   const classes = useUtilityClasses(ownerState);
 
+  const updatedChildren = children.map((child) => {
+    return React.cloneElement(child, {
+      index,
+      ...child.props,
+    });
+  });
+
   const newChildren = (
     <StepRoot
       as={component}
@@ -102,7 +109,7 @@ const Step = React.forwardRef(function Step(inProps, ref) {
       {...other}
     >
       {connector && alternativeLabel && index !== 0 ? connector : null}
-      {children}
+      {updatedChildren}
     </StepRoot>
   );
 

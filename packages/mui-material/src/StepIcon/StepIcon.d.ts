@@ -7,6 +7,10 @@ import { StepIconClasses } from './stepIconClasses';
 export interface StepIconProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, 'children'> {
   /**
+   * Index of the step.
+   */
+  index?: number;
+  /**
    * Whether this step is active.
    * @default false
    */
