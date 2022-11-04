@@ -93,7 +93,7 @@ export const getStyle = ({ ownerState, theme }) => {
     }
 
     return {
-      margin: `calc(0px - (${spacing} / 2))`,
+      margin: `0`,
       '& > *': {
         margin: `calc(${spacing} / 2)`,
       },
