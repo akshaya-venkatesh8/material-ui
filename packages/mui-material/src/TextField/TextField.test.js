@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import TextField, { textFieldClasses as classes } from '@mui/material/TextField';
 import { fireEvent } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 
 describe('<TextField />', () => {
   const { render } = createRenderer();
@@ -303,6 +304,98 @@ describe('<TextField />', () => {
       
       expect(textInput).to.have.value('val');
       expect(charCount).to.have.text('3/20');
+    });
+
+    it('create textfield with input text and a character counter (use userEvent)', async () => {
+      const { getByTestId, getByRole } = render(
+        <TextField
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
+      );
+
+      const user = userEvent.setup();
+
+      const charCount = getByTestId('charCounter');
+      const textInput = getByRole('textbox');
+    
+      await user.click(textInput);
+      await user.keyboard('new value');
+
+      expect(textInput).to.have.value('new value');
+      expect(charCount).to.have.text('9/20');
+    });
+
+    it('create textfield with input text and a character counter, increase text amount (use userEvent)', async () => {
+      const { getByTestId, getByRole } = render(
+        <TextField
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
+      );
+
+      const user = userEvent.setup();
+
+      const charCount = getByTestId('charCounter');
+      const textInput = getByRole('textbox');
+    
+      await user.click(textInput);
+      await user.keyboard('new value');
+
+      expect(textInput).to.have.value('new value');
+      expect(charCount).to.have.text('9/20');
+
+      await user.keyboard(' here');
+
+      expect(textInput).to.have.value('new value here');
+      expect(charCount).to.have.text('14/20');
+    });
+
+    it('create textfield with input text and a character counter, decrease text amount (use userEvent)', async () => {
+      const { getByTestId, getByRole } = render(
+        <TextField
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
+      );
+
+      const user = userEvent.setup();
+
+      const charCount = getByTestId('charCounter');
+      const textInput = getByRole('textbox');
+    
+      await user.click(textInput);
+      await user.keyboard('new value');
+
+      expect(textInput).to.have.value('new value');
+      expect(charCount).to.have.text('9/20');
+      
+      for (let i = 9; i > 3; i--) {
+        await user.keyboard('[Backspace]');
+      }
+
+      expect(textInput).to.have.value('new');
+      expect(charCount).to.have.text('3/20');
+    });
+
+    it('create textfield with input text and a character counter, go over char limit (use userEvent)', async () => {
+      const { getByTestId, getByRole } = render(
+        <TextField
+          charCounter 
+          inputProps={{maxLength: 20}}
+        />
+      );
+
+      const user = userEvent.setup();
+
+      const charCount = getByTestId('charCounter');
+      const textInput = getByRole('textbox');
+    
+      await user.click(textInput);
+      await user.keyboard('new value here please!');
+
+      expect(textInput).to.have.value('new value here pleas');
+      expect(charCount).to.have.text('20/20');
     });
   });
 });
